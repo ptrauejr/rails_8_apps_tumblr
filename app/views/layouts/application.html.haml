@@ -14,7 +14,8 @@
       %li= link_to "Posts", root_path
       %li= link_to "About", about_path
 
-    %p.sign_in= link_to "User Login", new_user_session_path
+    - if !user_signed_in?
+      %p.sign_in= link_to "User Login", new_user_session_path
   #main_content
     #header
       - if current_page?(root_path)
@@ -24,9 +25,10 @@
       - else
         = link_to "Back to Post Feed", root_path
 
-      .buttons
-        %button.button= link_to "Make Post", new_post_path
-        %button.button= link_to "Sign Out", destroy_user_session_path, method: :delete
+      - if user_signed_in?
+        .buttons
+          %button.button= link_to "Make Post", new_post_path
+          %button.button= link_to "Sign Out", destroy_user_session_path, method: :delete
     - flash.each do |name, msg|
       = content_tag(:div, msg, class: "alert")
     = yield
