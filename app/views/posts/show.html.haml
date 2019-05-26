@@ -1,7 +1,8 @@
-%h1.title= @post.title
+#post_content
+  %h1.title= @post.title
 
-%p.date
-  Submitted
-  = time_ago_in_words(@post.created_at)
+  %p.date
+    Submitted
+    = time_ago_in_words(@post.created_at)
 
-%p.body= @post.body
+  %p.body= @post.body
